@@ -23,7 +23,9 @@ TOPWAY LM6023 128x64 LCD Display
 | 17 | DB6 (SCL) | D8 | D13 |
 | 18 | DB7 (SI) | D9 | D11 |
 | 19 | BLA | 3.3v | 3.3v |
-| 20 | BLK | D4 with 1K ohm and NPN to GND | D4 with 1K ohm and NPN to GND |
+| 20 | BLK | D4* | D4* |
+
+Remark *: with 1K ohm and NPN to GND
 
 ## TODO
 - more detail of this readme file
