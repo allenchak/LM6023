@@ -1,5 +1,6 @@
 # LM6023
 TOPWAY LM6023 128x64 LCD Display
+The orignal version from ladyada (https://github.com/adafruit/ST7565-LCD/)
 
 ## Pinout
 | Pin | Description | Arduino | Arduino HW SPI |
