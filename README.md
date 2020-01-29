@@ -1,6 +1,10 @@
 # LM6023
-TOPWAY LM6023 128x64 LCD Display
-The orignal version from ladyada (https://github.com/adafruit/ST7565-LCD/)
+TOPWAY LM6023 is 128x64 LCD display using S1D15300 controller, accepting 8080, 6800 and serial interface.
+I would like say thankyou to ladyada, because this library based on [ST7565-LCD](https://github.com/adafruit/ST7565-LCD/) version. 
+
+## Demo video
+[!](https://www.youtube.com/watch?v=LYUDzZLhVGs)
+
 
 ## Pinout
 | Pin | Description | Arduino | Arduino HW SPI |
@@ -26,7 +30,7 @@ The orignal version from ladyada (https://github.com/adafruit/ST7565-LCD/)
 | 19 | BLA | 3.3v | 3.3v |
 | 20 | BLK | D4* | D4* |
 
-Remark *: with 1K ohm and NPN to GND
+Remark \*: with 1K ohm and NPN to GND
 
 ## TODO
 - more detail of this readme file
