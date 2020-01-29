@@ -17,10 +17,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 // https://github.com/adafruit/ST7565-LCD/blob/master/ST7565/ST7565.cpp
 */
 
-#ifndef _AC_S1D15300_H
-#define _AC_S1D15300_H
-
-//#include <Wire.h>
 #ifdef __AVR__
 #include <avr/pgmspace.h>
 #include <util/delay.h>
@@ -36,10 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 
 #include <stdlib.h>
-
-
-
-
+#include <SPI.h>
 #include "S1D15300.h"
 
 #define S1D15300_STARTBYTES   0
@@ -47,7 +40,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 // reduces how much is refreshed, which speeds it up!
 // originally derived from Steve Evans/JCW's mod but cleaned up and optimized
-#define enablePartialUpdate
+// Due to Hardware SPI supported, do not recommanded to enable this feature
+//#define enablePartialUpdate
 
 
 // a handy reference to where the pages are on the screen
@@ -441,11 +435,20 @@ uint8_t S1D15300::getpixel(uint8_t x, uint8_t y) {
 
 void S1D15300::begin(uint8_t contrast) {
   // set pin directions
-  pinMode(sid, OUTPUT);
-  pinMode(sclk, OUTPUT);
+  if (sid > 0) {
+    pinMode(sid, OUTPUT);
+    pinMode(sclk, OUTPUT);
+  } else {
+    SPI.begin();
+    /*
+    //TODO
+    //SPI.setClockDivider(SPI_CLOCK_DIV4); // SPI_CLOCK_DIV8 for UNO ??, 2, 4, 8, 16, 32, 64, 128
+    */
+  }
   pinMode(a0, OUTPUT);
   pinMode(rst, OUTPUT);
-  pinMode(cs, OUTPUT);
+  if (cs > 0)
+    pinMode(cs, OUTPUT);
   
   s1d15300_init(); // must be completed within 5 ms; Full doc page 148
   s1d15300_set_brightness(contrast);
@@ -496,7 +499,12 @@ void S1D15300::s1d15300_init(void) {
 inline void S1D15300::spiwrite(uint8_t c) {
 
 #if not defined (_VARIANT_ARDUINO_DUE_X_) && not defined (_VARIANT_ARDUINO_ZERO_)
-    shiftOut(sid, sclk, MSBFIRST, c);
+    if (sid > 0) {
+      shiftOut(sid, sclk, MSBFIRST, c);
+    }
+    else {
+      SPI.transfer(c);
+    }
 #else
     int8_t i;
     for (i=7; i>=0; i--) {
@@ -613,5 +621,3 @@ void S1D15300::clear_display(void) {
     }     
   }
 }
-
-#endif

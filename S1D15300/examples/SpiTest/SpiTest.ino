@@ -4,14 +4,16 @@
 
 #define BACKLIGHT_LED  4
 
-// D9 - Serial data out (SID), Pin 18
-// D8 - Serial clock out (SCLK), Pin 17
+// D9 / D11 - Serial data out (SID), Pin 18
+// D8 / D13 - Serial clock out (SCLK), Pin 17
 // D7 - Data/Command select (RS or A0), Pin 8
 // D6 - LCD reset (RST), Pin 3
 // D5 - LCD chip select (CS), Pin 5
 // GND - LCD P/S (Interface), Pin 4
 // 3v3 - LCD CS2, Pin 6
-S1D15300 glcd(9, 8, 7, 6, 5);
+
+//S1D15300 glcd(9, 8, 7, 6, 5);
+S1D15300 glcd(-1, -1, 7, 6, 5);
 
 // the buffer for the image display
 extern uint8_t s1d15300_buffer[1024];

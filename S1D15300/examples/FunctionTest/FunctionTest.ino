@@ -11,7 +11,11 @@
 // D5 - LCD chip select (CS), Pin 5
 // GND - LCD P/S (Interface), Pin 4
 // 3v3 - LCD CS2, Pin 6
-S1D15300 glcd(9, 8, 7, 6, 5);
+
+//S1D15300 glcd(9, 8, 7, 6, 5); //Software SPI
+S1D15300 glcd(7, 6, 5); // Hardware SPI with CS
+//S1D15300 glcd(-1, -1, 7, 6, 5); // Hardware SPI with CS
+//S1D15300 glcd(7, 6); // Hardware SPI without CS
 
 #define LOGO16_GLCD_HEIGHT 16 
 #define LOGO16_GLCD_WIDTH  16 

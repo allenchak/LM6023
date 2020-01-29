@@ -1,4 +1,7 @@
 
+#ifndef _AC_S1D15300_H
+#define _AC_S1D15300_H
+
 #if ARDUINO >= 100
  #include "Arduino.h"
 #else
@@ -56,6 +59,9 @@ class S1D15300 {
   public:
     S1D15300(int8_t SID, int8_t SCLK, int8_t A0, int8_t RST, int8_t CS) :sid(SID), sclk(SCLK), a0(A0), rst(RST), cs(CS) {}
     S1D15300(int8_t SID, int8_t SCLK, int8_t A0, int8_t RST) :sid(SID), sclk(SCLK), a0(A0), rst(RST), cs(-1) {}
+
+    S1D15300(int8_t A0, int8_t RST, int8_t CS) :sid(-1), sclk(-1), a0(A0), rst(RST), cs(CS) {} //For SPI
+    S1D15300(int8_t A0, int8_t RST) :sid(-1), sclk(-1), a0(A0), rst(RST), cs(-1) {} //For SPI
   
   
     void s1d15300_init(void);
@@ -86,3 +92,5 @@ class S1D15300 {
     void my_setpixel(uint8_t x, uint8_t y, uint8_t color);
     //uint8_t buffer[128*64/8]; 
 };
+
+#endif
